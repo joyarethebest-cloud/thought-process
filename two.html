@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>THOUGHTS</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #07152f, #0d2347, #132d59);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+h1 {
+    font-size: 60px;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    color: #f5f8ff;
+}
+
+.subtitle {
+    color: #aebed8;
+    margin-bottom: 40px;
+}
+
+.box {
+    background: rgba(30, 59, 105, 0.65);
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(150,180,220,0.15);
+}
+
+textarea {
+    width: 100%;
+    height: 130px;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #526d99;
+    border-radius: 12px;
+    resize: none;
+    font-size: 16px;
+    background: #eef4fc;
+    color: #10213d;
+}
+
+select,
+button {
+    padding: 12px 18px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 20px;
+}
+
+select {
+    background: #edf3fb;
+    color: #172b4d;
+}
+
+button {
+    background: #dce9f8;
+    color: #10213d;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.thought {
+    width: 100%;
+    background: rgba(30,59,105,0.65);
+    padding: 20px;
+    border-radius: 18px;
+    margin: 15px 0;
+    text-align: left;
+    border: 1px solid rgba(150,180,220,0.15);
+}
+
+.thought-category {
+    font-size: 11px;
+    color: #9eb9dc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.thought-text {
+    font-family: "Playfair Display", serif;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.7;
+    color: #edf4ff;
+    overflow-wrap: anywhere;
+}
+
+.thought-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    color: #7188a8;
+    font-size: 10px;
+}
+
+.thought-bottom button {
+    background: none;
+    color: #9eb9dc;
+    padding: 5px 8px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.empty {
+    color: #9aabc4;
+    line-height: 1.6;
+}
+
+</style>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDMZvRSGxdDpwLy6NO0wuyvfOFAodyW9dU",
+    authDomain: "thought-process-1d8fe.firebaseapp.com",
+    projectId: "thought-process-1d8fe",
+    storageBucket: "thought-process-1d8fe.firebasestorage.app",
+    messagingSenderId: "281656157372",
+    appId: "1:281656157372:web:86bddf1393c06ebcd31cb9",
+    measurementId: "G-W5482WCXYH"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+  window.collection = collection;
+  window.addDoc = addDoc;
+  window.onSnapshot = onSnapshot;
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>THOUGHT PROCESS</h1>
+
+ <p class="subtitle">
+ Some things are easier left unsaid.
+</p>
+
+<div class="box">
+
+<h2>Leave Something Behind</h2>
+
+<textarea id="thought"
+placeholder="What have you been keeping to yourself?"></textarea>
+
+<br>
+
+<select id="category">
+ <option>Unspoken</option>
+ <option>Nostalgic</option>
+ <option>Yearning</option>
+ <option>Bittersweet</option>
+ <option>What If</option>
+ <option>Almost</option>
+ <option>Longing</option>
+ <option>Healing</option>
+</select>
+
+<br>
+
+ <button onclick="postThought()">
+ Leave It Here
+</button>
+
+</div>
+
+ <h2>From Someone, Somewhere</h2>
+
+<div id="thoughts">
+
+ <div class="thought">
+
+ <div class="thought-category">
+            Nostalgic
+ </div>
+
+ <div class="thought-text">
+ “I miss the days when everything felt simple.”
+ </div>
+
+ <div class="thought-bottom">
+ <span>anonymous · just now</span>
+
+ <button onclick="likeThought(this)">
+ ♡ <span>0</span>
+ </button>
+ </div>
+
+ </div>
+
+
+ <div class="thought">
+
+ <div class="thought-category">
+ Unspoken
+ </div>
+
+ <div class="thought-text">
+ “There are so many things I wish I had said before it was too late.”
+ </div>
+
+ <div class="thought-bottom">
+ <span>anonymous · just now</span>
+
+ <button onclick="likeThought(this)">
+ ♡ <span>0</span>
+ </button>
+ </div>
+
+ </div>
+
+
+ <div class="thought">
+
+ <div class="thought-category">
+ Almost
+ </div>
+
+ <div class="thought-text">
+ “Maybe we were never meant to be, but I still wonder what we could have been.”
+ </div>
+
+ <div class="thought-bottom">
+ <span>anonymous · just now</span>
+
+ <button onclick="likeThought(this)">
+ ♡ <span>0</span>
+ </button>
+ </div>
+
+</div>
+
+</div>
+<script>
+
+async function postThought() {
+
+    let text = document.getElementById("thought").value.trim();
+    let category = document.getElementById("category").value;
+
+    if (text === "") {
+        alert("What's something you've never said out loud?");
+        return;
+    }
+
+    try {
+
+        await addDoc(collection(db, "thoughts"), {
+            text: text,
+            category: category
+        });
+
+        document.getElementById("thought").value = "";
+
+    } catch (error) {
+
+        console.log(error);
+        alert("Something went wrong.");
+
+    }
+}
+
+
+onSnapshot(collection(db, "thoughts"), (snapshot) => {
+
+    let container = document.getElementById("thoughts");
+
+    container.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+
+        let data = doc.data();
+
+        let thought = document.createElement("div");
+
+        thought.className = "thought";
+
+        thought.innerHTML =
+            "<div class='thought-category'>" +
+            data.category +
+            "</div>" +
+
+            "<div class='thought-text'>" +
+            "&ldquo;" + data.text + "&rdquo;" +
+            "</div>" +
+
+            "<div class='thought-bottom'>" +
+            "<span>anonymous</span>" +
+            "</div>";
+
+        container.appendChild(thought);
+
+    });
+
+});
+
+
+function likeThought(button) {
+
+    let number = button.querySelector("span");
+
+    number.textContent =
+        Number(number.textContent) + 1;
+
+    button.firstChild.textContent = "♥ ";
+
+}
+  
+</script>
+
+</body>
+</html>
